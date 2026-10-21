@@ -1,10 +1,9 @@
 {
-  "name": "zann-backend",
+  "name": "zann-backend-vercel",
   "version": "1.0.0",
-  "description": "TikTok Live Connector Backend",
-  "main": "server.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node api/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
