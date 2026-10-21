@@ -408,7 +408,9 @@
     <!-- Socket.IO Client -->
     <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.7.2/dist/socket.io.min.js"></script>
     <script>
-        const socket = io("https://zann-eliminasi-mode-production.up.railway.app");
+        // URL Cloudflare Tunnel aktif terhubung ke backend Termux
+        const socket = io("https://731a-114-122-111-209.ngrok-free.app");
+        
         let participants = [];
         let activeRoom = 1;
         let roomTimers = { 1: null, 2: null, 3: null, 4: null, 5: null };
@@ -513,7 +515,6 @@
         // Tambah Peserta Manual di Ruangan Eliminasi
         function addManualParticipant() {
             let mode = document.getElementById('game-mode').value;
-            // Jika Locked Mode dan waktu habis, tolak. Jika No Locked ('nolocked'), abaikan waktu habis.
             if(activeRoom === 4 && mode === 'locked' && roomTimesLeft[4] <= 0) {
                 return alert("Waktu habis! Locked Mode aktif, pendaftaran manual ditutup.");
             }
@@ -528,9 +529,6 @@
         socket.on('tiktok-gift', (data) => {
             let mode = document.getElementById('game-mode').value;
 
-            // LOGIKA PENGAMANAN MODE:
-            // Jika mode 'locked' DAN waktu sudah habis (<= 0), tolak gift baru.
-            // Jika mode 'nolocked' (Open Mode), waktu habis TETAP DIIZINKAN masuk.
             if(activeRoom === 4 && mode === 'locked' && roomTimesLeft[4] <= 0) {
                 console.log("Locked Mode aktif & waktu habis: Gift ditolak.");
                 return; 
